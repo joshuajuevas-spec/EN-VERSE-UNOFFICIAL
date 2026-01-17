@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useCollection } from '@/firebase/firestore/use-collection';
@@ -6,6 +7,7 @@ import { useFirestore, useMemoFirebase } from '@/firebase';
 import { FeedCard } from '@/components/content/feed-card';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { FeedItem } from '@/lib/types';
+import { feedData } from '@/lib/feed-data';
 
 function FeedSkeleton() {
   return (
@@ -47,12 +49,16 @@ export default function Home() {
 
   const { data: feedItems, isLoading } = useCollection<FeedItem>(feedQuery as Query<DocumentData, DocumentData> | null | undefined);
 
+  // If loading is done and the firestore feed is empty, use the static seed data.
+  // Otherwise, use the firestore data (which could be null during load or populated after).
+  const itemsToDisplay = !isLoading && feedItems?.length === 0 ? feedData : feedItems;
+
   return (
     <div className="space-y-12 animate-fade-in">
       <section className="space-y-6">
         {isLoading && <FeedSkeleton />}
-        {feedItems && feedItems.length > 0 ? (
-          feedItems.map((item) => (
+        {itemsToDisplay && itemsToDisplay.length > 0 ? (
+          itemsToDisplay.map((item) => (
             <FeedCard key={item.id} item={item} />
           ))
         ) : (

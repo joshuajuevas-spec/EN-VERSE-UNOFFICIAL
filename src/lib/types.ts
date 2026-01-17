@@ -7,7 +7,7 @@ export type FeedItem = {
   title: string;
   description: string;
   date: string; // ISO 8601 format
-  era: Era;
+  era?: Era;
   imageUrl: string;
   sourceUrl: string;
   memberIds?: string[];
