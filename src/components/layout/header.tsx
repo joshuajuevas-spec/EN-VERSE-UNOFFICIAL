@@ -1,23 +1,46 @@
-
 'use client';
 
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { useSidebar } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Bell, Check } from 'lucide-react';
+import { Search, Bell } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { notifications } from '@/lib/data';
+import Link from 'next/link';
 
 export function Header() {
+  const { toggleSidebar } = useSidebar();
+
+  const Logo = () => (
+     <div className="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-primary">
+            <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-2.625 6c-.54 0-.975.435-.975.975s.435.975.975.975.975-.435.975-.975S9.915 8.25 9.375 8.25Zm3.75 0c-.54 0-.975.435-.975.975s.435.975.975.975.975-.435.975-.975S13.665 8.25 13.125 8.25Zm-5.25 6.375c.245-.244.59-.387.953-.387h3.844c.363 0 .708.143.953.387.351.35.422.89.176 1.304a5.972 5.972 0 0 1-5.902 0c-.246-.414-.175-.954.176-1.304Z" />
+        </svg>
+      <span className="font-bold text-lg text-foreground">
+        EN-VERSE
+      </span>
+    </div>
+  );
+
+
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 backdrop-blur-sm px-4 lg:px-8">
-      <div className="md:hidden">
-        <SidebarTrigger />
-      </div>
+        <div className="md:hidden">
+            <button onClick={toggleSidebar} className="flex items-center gap-2">
+                <span className="sr-only">Toggle Sidebar</span>
+                <Logo />
+            </button>
+        </div>
+        <div className="hidden md:flex">
+             <Link href="/">
+                <Logo />
+            </Link>
+        </div>
+
       <div className="w-full flex-1">
         <form>
           <div className="relative">
