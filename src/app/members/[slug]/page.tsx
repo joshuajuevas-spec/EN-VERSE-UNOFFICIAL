@@ -15,12 +15,6 @@ import { collection, query, where, orderBy, Query } from 'firebase/firestore';
 import type { FeedItem } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export async function generateStaticParams() {
-  return members.map((member) => ({
-    slug: member.slug,
-  }));
-}
-
 function GallerySkeleton() {
     return (
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -53,7 +47,7 @@ export default function MemberProfilePage({ params }: { params: { slug: string }
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Header section */}
-      <section className="relative w-full h-[50vh] -mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
+      <section className="relative w-full h-[50vh] -mt-8 -mx-4 sm:-mx-8 lg:-mx-8">
         <Image
           src={member.avatarUrl.replace('/400/400', '/1200/800')} // use a larger image for banner
           alt={`${member.name} Banner`}
