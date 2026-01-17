@@ -1,0 +1,188 @@
+{
+  "entities": {
+    "NewsUpdate": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "NewsUpdate",
+      "type": "object",
+      "description": "Represents a news update related to Enhypen.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the news update."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the news update."
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the news update."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the news update (e.g., Weverse, Twitter)."
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp of when the news update was published.",
+          "format": "date-time"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of an image associated with the news update.",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "content",
+        "source",
+        "timestamp"
+      ]
+    },
+    "VideoContent": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "VideoContent",
+      "type": "object",
+      "description": "Represents a video content item related to Enhypen.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the video content."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the video."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the video content."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the video.",
+          "format": "uri"
+        },
+        "sourcePlatform": {
+          "type": "string",
+          "description": "Platform where the video is hosted (e.g., YouTube, Netflix)."
+        },
+        "uploadDate": {
+          "type": "string",
+          "description": "Date when the video was uploaded.",
+          "format": "date-time"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the video (e.g., Performance, Behind the Scenes)."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "url",
+        "sourcePlatform",
+        "uploadDate",
+        "category"
+      ]
+    },
+    "Photo": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Photo",
+      "type": "object",
+      "description": "Represents a photo related to Enhypen.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the photo."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title or brief description of the photo."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the photo.",
+          "format": "uri"
+        },
+        "uploadDate": {
+          "type": "string",
+          "description": "Date when the photo was uploaded.",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the photo (e.g., Weverse, official website)."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "url",
+        "uploadDate",
+        "source"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/news_updates/{newsUpdateId}",
+        "definition": {
+          "entityName": "NewsUpdate",
+          "schema": {
+            "$ref": "#/backend/entities/NewsUpdate"
+          },
+          "description": "Collection for storing news updates related to Enhypen. Each document represents a single news update. Supports listing of news updates.",
+          "params": [
+            {
+              "name": "newsUpdateId",
+              "description": "Unique identifier for the news update."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/video_content/{videoContentId}",
+        "definition": {
+          "entityName": "VideoContent",
+          "schema": {
+            "$ref": "#/backend/entities/VideoContent"
+          },
+          "description": "Collection for storing video content related to Enhypen. Each document represents a single video content item. Supports listing of video content.",
+          "params": [
+            {
+              "name": "videoContentId",
+              "description": "Unique identifier for the video content."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/photos/{photoId}",
+        "definition": {
+          "entityName": "Photo",
+          "schema": {
+            "$ref": "#/backend/entities/Photo"
+          },
+          "description": "Collection for storing photos related to Enhypen. Each document represents a single photo. Supports listing of photos.",
+          "params": [
+            {
+              "name": "photoId",
+              "description": "Unique identifier for the photo."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to support real-time updates and comprehensive content management for the EN-VERSE app, focusing on Enhypen-related news, videos, and photos. The design prioritizes authorization independence to ensure robust security rules and scalable data access. It adheres to the principle of Authorization Independence via Denormalization, ensuring that security rules do not rely on complex hierarchical `get()` calls, thus optimizing performance and security.\n\nThe `news_updates`, `video_content`, and `photos` collections are structured to provide simple, secure `list` operations (QAPs). All documents within each collection have the same security requirements, ensuring a homogeneous security posture. There are no roles, and authorization depends only on `request.auth.uid`, simplifying security rules.\n\nSince no user-specific private data or collaborative features were outlined in the request, a simple top-level collection approach is used. If user-specific data or collaborative features were needed, a `/users/{userId}` subcollection structure would be utilized with denormalization of authorization data as needed."
+  }
+}
