@@ -2,8 +2,7 @@
 
 import { useSidebar } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Search, Bell } from 'lucide-react';
+import { Bell, ArrowRight } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
@@ -11,6 +10,7 @@ import {
 } from '@/components/ui/popover';
 import { notifications } from '@/lib/data';
 import Link from 'next/link';
+import { Card, CardFooter } from '../ui/card';
 
 export function Header() {
   const { toggleSidebar } = useSidebar();
@@ -28,7 +28,7 @@ export function Header() {
 
 
   return (
-    <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 backdrop-blur-sm px-4 lg:px-8">
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background/80 backdrop-blur-sm px-4 lg:px-8">
         <div className="md:hidden">
             <button onClick={toggleSidebar} className="flex items-center gap-2">
                 <span className="sr-only">Toggle Sidebar</span>
@@ -41,35 +41,24 @@ export function Header() {
             </Link>
         </div>
 
-      <div className="w-full flex-1">
-        <form>
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search content..."
-              className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-            />
-          </div>
-        </form>
-      </div>
+      <div className="w-full flex-1" />
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline" size="icon" className="shrink-0">
-            <Bell className="h-4 w-4" />
+          <Button variant="ghost" size="icon" className="shrink-0">
+            <Bell className="h-5 w-5" />
             <span className="sr-only">Toggle notifications</span>
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-80">
-          <div className="grid gap-4">
-            <div className="space-y-2">
+        <PopoverContent className="w-80 p-0" asChild>
+          <Card>
+            <div className="p-4">
               <h4 className="font-medium leading-none">Notifications</h4>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground mt-1">
                 Recent updates from EN-VERSE.
               </p>
             </div>
-            <div className="grid gap-2">
-              {notifications.map((notification) => (
+            <div className="grid gap-2 p-4 pt-0 max-h-80 overflow-y-auto">
+              {notifications.slice(0,5).map((notification) => (
                 <div
                   key={notification.id}
                   className="grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
@@ -89,7 +78,14 @@ export function Header() {
                 </div>
               ))}
             </div>
-          </div>
+            <CardFooter className="p-2 border-t bg-muted/50">
+                <Button asChild variant="link" size="sm" className="w-full">
+                    <Link href="/notifications">
+                        View All Notifications <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                </Button>
+            </CardFooter>
+          </Card>
         </PopoverContent>
       </Popover>
     </header>

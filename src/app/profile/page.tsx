@@ -2,7 +2,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Settings, Shield, Star, LogOut, ChevronRight } from "lucide-react";
+import { Settings, Shield, Star, LogOut, ChevronRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function ProfilePage() {
     return (
@@ -18,6 +19,21 @@ export default function ProfilePage() {
                 </div>
                 <Button variant="outline">Edit Profile</Button>
             </div>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>AI Tools</CardTitle>
+                </CardHeader>
+                <CardContent>
+                     <Link href="/discover" className="flex justify-between items-center p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                        <div className="flex items-center gap-4">
+                           <Sparkles className="w-5 h-5 text-muted-foreground"/>
+                           <span>Automated Content Discovery</span>
+                        </div>
+                        <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                    </Link>
+                </CardContent>
+            </Card>
 
             <Card>
                 <CardHeader>
