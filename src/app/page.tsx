@@ -47,7 +47,7 @@ export default function Home() {
     return query(collection(firestore, 'feed'), orderBy('date', 'desc'));
   }, [firestore]);
 
-  const { data: feedItems, isLoading } = useCollection<FeedItem>(feedQuery as Query<DocumentData, DocumentData> | null | undefined);
+  const { data: feedItems, isLoading } = useCollection<FeedItem>(feedQuery);
 
   // If loading is done and the firestore feed is empty, use the static seed data.
   // Otherwise, use the firestore data (which could be null during load or populated after).

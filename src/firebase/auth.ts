@@ -33,6 +33,7 @@ const createUserProfileDocument = (user: any, additionalData: any) => {
   // a set with merge `true` will create the doc if it doesn't exist, and merge the data if it does
   setDoc(userRef, profileData, { merge: true })
     .catch((error) => {
+      console.error("Error creating user profile document:", error);
       const permissionError = new FirestorePermissionError({
         path: userRef.path,
         operation: 'write',

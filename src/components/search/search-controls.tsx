@@ -28,7 +28,7 @@ export function SearchControls({ initialItems }: SearchControlsProps) {
       .filter((item) =>
         item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        item.era.toLowerCase().includes(searchTerm.toLowerCase())
+        (item.era && item.era.toLowerCase().includes(searchTerm.toLowerCase()))
       );
   }, [searchTerm, initialItems]);
 

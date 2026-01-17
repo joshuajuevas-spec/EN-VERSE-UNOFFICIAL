@@ -34,7 +34,7 @@ export default function SearchPage() {
     return query(collection(firestore, 'feed'), orderBy('date', 'desc'));
   }, [firestore]);
   
-  const { data: allItems, isLoading } = useCollection<FeedItem>(feedQuery as Query | null | undefined);
+  const { data: allItems, isLoading } = useCollection<FeedItem>(feedQuery);
 
   if (isLoading || !allItems) {
     return <SearchPageSkeleton />;

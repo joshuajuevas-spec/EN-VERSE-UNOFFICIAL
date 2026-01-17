@@ -38,7 +38,7 @@ export default function MemberProfilePage({ params }: { params: { slug: string }
     );
   }, [firestore, member]);
 
-  const { data: memberContent, isLoading } = useCollection<FeedItem>(memberContentQuery as Query | null | undefined);
+  const { data: memberContent, isLoading } = useCollection<FeedItem>(memberContentQuery);
 
   if (!member) {
     notFound();
