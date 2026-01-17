@@ -6,6 +6,8 @@ import { Header } from '@/components/layout/header';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { BottomNav } from '@/components/layout/bottom-nav';
+import { FirebaseClientProvider } from '@/firebase';
+import { FirebaseErrorListener } from '@/components/FirebaseErrorListener';
 
 export const metadata: Metadata = {
   title: 'EN-VERSE',
@@ -28,18 +30,21 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('font-body antialiased', 'dark')}>
-        <SidebarProvider>
-          <div className="min-h-screen">
-            <MainNav />
-            <SidebarInset>
-              <div className="flex flex-col h-full">
-                <Header />
-                <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-20 md:pb-8">{children}</main>
-              </div>
-            </SidebarInset>
-          </div>
-          <BottomNav />
-        </SidebarProvider>
+        <FirebaseClientProvider>
+          <FirebaseErrorListener />
+          <SidebarProvider>
+            <div className="min-h-screen">
+              <MainNav />
+              <SidebarInset>
+                <div className="flex flex-col h-full">
+                  <Header />
+                  <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-20 md:pb-8">{children}</main>
+                </div>
+              </SidebarInset>
+            </div>
+            <BottomNav />
+          </SidebarProvider>
+        </FirebaseClientProvider>
         <Toaster />
       </body>
     </html>
