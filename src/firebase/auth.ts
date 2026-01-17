@@ -11,27 +11,35 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
+import { errorEmitter } from '@/firebase/error-emitter';
+import { FirestorePermissionError } from '@/firebase/errors';
 
 // Helper function to create a user profile document in Firestore
-const createUserProfileDocument = async (user: any, additionalData: any) => {
+const createUserProfileDocument = (user: any, additionalData: any) => {
   if (!user) return;
   const userRef = doc(getFirestore(user.app), 'users', user.uid);
   
   const { displayName, email, photoURL } = user;
   const createdAt = serverTimestamp();
 
-  try {
-    // a set with merge `true` will create the doc if it doesn't exist, and merge the data if it does
-    await setDoc(userRef, {
-      displayName: additionalData.displayName || displayName,
-      email,
-      photoURL: photoURL || `https://picsum.photos/seed/${email}/200`,
-      createdAt,
-      ...additionalData,
-    }, { merge: true });
-  } catch (error) {
-    console.error('Error creating user document', error);
-  }
+  const profileData = {
+    displayName: additionalData.displayName || displayName,
+    email,
+    photoURL: photoURL || `https://picsum.photos/seed/${email}/200`,
+    createdAt,
+    ...additionalData,
+  };
+
+  // a set with merge `true` will create the doc if it doesn't exist, and merge the data if it does
+  setDoc(userRef, profileData, { merge: true })
+    .catch((error) => {
+      const permissionError = new FirestorePermissionError({
+        path: userRef.path,
+        operation: 'write',
+        requestResourceData: profileData,
+      });
+      errorEmitter.emit('permission-error', permissionError);
+    });
 };
 
 
@@ -43,8 +51,8 @@ export const signUpWithEmail = async (auth: Auth, email: string, password: strin
     if (userCredential.user) {
         await updateProfile(userCredential.user, { displayName });
     }
-    // Create the user profile document in Firestore
-    await createUserProfileDocument(userCredential.user, { displayName });
+    // Create the user profile document in Firestore (non-blocking)
+    createUserProfileDocument(userCredential.user, { displayName });
     return userCredential;
   } catch (error) {
     console.error("Error signing up with email and password", error);
@@ -71,7 +79,7 @@ export const signInWithGoogle = async (auth: Auth) => {
     // If it's a new user, create a profile document
     const additionalUserInfo = getAdditionalUserInfo(userCredential);
     if (additionalUserInfo?.isNewUser) {
-        await createUserProfileDocument(userCredential.user, {});
+        createUserProfileDocument(userCredential.user, {});
     }
     return userCredential;
   } catch (error) {
