@@ -5,6 +5,7 @@ import { MainNav } from '@/components/layout/main-nav';
 import { Header } from '@/components/layout/header';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
+import { BottomNav } from '@/components/layout/bottom-nav';
 
 export const metadata: Metadata = {
   title: 'EN-VERSE',
@@ -33,10 +34,11 @@ export default function RootLayout({
             <SidebarInset>
               <div className="flex flex-col h-full">
                 <Header />
-                <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+                <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-20 md:pb-8">{children}</main>
               </div>
             </SidebarInset>
           </div>
+          <BottomNav />
         </SidebarProvider>
         <Toaster />
       </body>
