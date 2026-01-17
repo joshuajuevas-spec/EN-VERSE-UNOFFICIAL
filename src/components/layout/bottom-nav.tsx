@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -19,7 +18,7 @@ export function BottomNav() {
     { href: '/search', label: 'Search', icon: Search },
     // Dynamically change the profile/login tab
     ...(isUserLoading ? [] : user 
-      ? [{ href: '/profile', label: 'My', icon: UserIcon }] 
+      ? [{ href: '/profile', label: 'Profile', icon: UserIcon }] 
       : [{ href: '/login', label: 'Login', icon: LogIn }]),
   ];
 
