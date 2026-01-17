@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { MessageSquare, Heart, Share2, PlayCircle, Newspaper, Image as ImageIcon } from 'lucide-react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { Badge } from '../ui/badge';
+import Link from 'next/link';
 
 type FeedCardProps = {
   item: ContentItem;
@@ -30,12 +31,16 @@ export function FeedCard({ item }: FeedCardProps) {
   return (
     <Card className="w-full max-w-2xl mx-auto">
         <CardHeader className="flex flex-row items-center gap-4 p-4">
-            <Avatar className="h-10 w-10">
-                <AvatarImage src="https://picsum.photos/seed/en-logo/40/40" data-ai-hint="group logo" />
-                <AvatarFallback>EN</AvatarFallback>
-            </Avatar>
+            <Link href="/enhypen">
+                <Avatar className="h-10 w-10">
+                    <AvatarImage src="https://picsum.photos/seed/en-logo/40/40" data-ai-hint="group logo" />
+                    <AvatarFallback>EN</AvatarFallback>
+                </Avatar>
+            </Link>
             <div className="flex-1">
-                <p className="font-semibold">ENHYPEN</p>
+                <Link href="/enhypen">
+                    <p className="font-semibold hover:underline">ENHYPEN</p>
+                </Link>
                 <p className="text-xs text-muted-foreground">{formatDistanceToNow(parseISO(item.date), { addSuffix: true })}</p>
             </div>
             <Badge variant="outline" className="flex items-center gap-1.5">
