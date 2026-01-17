@@ -1,117 +1,27 @@
-/**
- * This Firestore Security Ruleset is designed for the EN-VERSE application, a content-focused
- * platform for Enhypen-related news, videos, and photos.
- *
- * Core Philosophy:
- * The security model prioritizes making content publicly accessible for reading while
- * ensuring that all data modification is disabled by default. This creates a secure,
 
- * "read-only" environment for all clients, preventing unauthorized writes. To enable
- * content management, the data schema must be updated to include an ownership field
- * (e.g., 'authorId') on each document.
- *
- * Data Structure:
- * The data is organized into three distinct, top-level collections:
- * - /news_updates: Contains all news articles.
- * - /video_content: Contains all video entries.
- * - /photos: Contains all photo entries.
- * This flat structure is simple, performant, and easy to secure.
- *
- * Key Security Decisions:
- * - Public Read Access: All collections (/news_updates, /video_content, /photos) are
- *   publicly readable and listable by any user, including unauthenticated ones.
- * - Writes Disabled by Default: All write operations (create, update, delete) are
- *   explicitly denied. This is a critical security measure because the current data
- *   schemas for NewsUpdate, VideoContent, and Photo lack an 'authorId' or 'ownerId'
- *   field. Without such a field, it's impossible to securely verify that a user has
- *   the permission to modify a document.
- * - Future-Proofing for Writes: Comments and placeholder rules are included to guide
- *   the developer on how to enable secure, owner-only writes once the schemas are updated.
- */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // -------------------------------------------------------------------------
-    // Helper Functions
-    // -------------------------------------------------------------------------
-
-    /**
-     * Checks if the user is authenticated.
-     */
     function isSignedIn() {
       return request.auth != null;
     }
 
-    // -------------------------------------------------------------------------
-    // Collection Rules
-    // -------------------------------------------------------------------------
-
-    /**
-     * @description Controls access to news updates. All users can read and list
-     *   news, but all write operations are disabled until an ownership model is
-     *   defined in the data schema.
-     * @path /news_updates/{newsUpdateId}
-     * @allow (get) Any user, signed in or not, can read a single news update.
-     * @deny (create) No user can create a news update.
-     * @principle Public read for content, secure writes by default.
-     */
-    match /news_updates/{newsUpdateId} {
-      allow get: if true;
-      allow list: if true;
-
-      // CRITICAL: Cannot implement owner-only writes because the 'NewsUpdate' entity is missing an 'ownerId' or 'authorId' field.
-      // To enable secure writes, add an 'authorId' field to your NewsUpdate documents.
-      // Then, update the rule to: `allow create: if request.resource.data.authorId == request.auth.uid;`
-      // and: `allow update, delete: if resource.data.authorId == request.auth.uid;`
-      allow create: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
-      allow update: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
-      allow delete: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
+    function isOwner(userId) {
+      return request.auth.uid == userId;
     }
 
-    /**
-     * @description Controls access to video content. All users can read and list
-     *   videos, but all write operations are disabled until an ownership model is
-     *   defined in the data schema.
-     * @path /video_content/{videoContentId}
-     * @allow (list) Any user, signed in or not, can list all video content.
-     * @deny (update) No user can update a video content document.
-     * @principle Public read for content, secure writes by default.
-     */
-    match /video_content/{videoContentId} {
-      allow get: if true;
-      allow list: if true;
-
-      // CRITICAL: Cannot implement owner-only writes because the 'VideoContent' entity is missing an 'ownerId' or 'authorId' field.
-      // To enable secure writes, add an 'authorId' field to your VideoContent documents.
-      // Then, update the rule to: `allow create: if request.resource.data.authorId == request.auth.uid;`
-      // and: `allow update, delete: if resource.data.authorId == request.auth.uid;`
-      allow create: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
-      allow update: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
-      allow delete: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
+    match /users/{userId} {
+      allow read, update: if isOwner(userId);
+      // Anyone can create a user profile document for themselves on signup
+      allow create: if isOwner(userId);
     }
 
-    /**
-     * @description Controls access to photos. All users can read and list photos,
-     *   but all write operations are disabled until an ownership model is
-     *   defined in the data schema.
-     * @path /photos/{photoId}
-     * @allow (get) Any user, signed in or not, can read a single photo.
-     * @deny (delete) No user can delete a photo document.
-     * @principle Public read for content, secure writes by default.
-     */
-    match /photos/{photoId} {
-      allow get: if true;
-      allow list: if true;
-
-      // CRITICAL: Cannot implement owner-only writes because the 'Photo' entity is missing an 'ownerId' or 'authorId' field.
-      // To enable secure writes, add an 'authorId' field to your Photo documents.
-      // Then, update the rule to: `allow create: if request.resource.data.authorId == request.auth.uid;`
-      // and: `allow update, delete: if resource.data.authorId == request.auth.uid;`
-      allow create: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
-      allow update: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
-      allow delete: if false; // TODO: Add owner validation once the schema is updated with an ownership field.
+    match /feed/{feedItemId} {
+      allow get, list: if true;
+      // For this sample, we are making the feed read-only for clients.
+      // In a real app, you would have admin roles to manage content.
+      allow create, update, delete: if false;
     }
-
   }
 }

@@ -1,8 +1,8 @@
 import { Bell } from 'lucide-react';
-import { notifications } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/card';
 
 export default function NotificationsPage() {
+  const notifications: any[] = [];
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
       <div className="flex items-center gap-4">

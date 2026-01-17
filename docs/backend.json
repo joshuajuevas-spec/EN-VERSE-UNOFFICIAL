@@ -1,188 +1,94 @@
 {
   "entities": {
-    "NewsUpdate": {
+    "UserProfile": {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "NewsUpdate",
+      "title": "User Profile",
       "type": "object",
-      "description": "Represents a news update related to Enhypen.",
+      "description": "Represents a user's profile information.",
       "properties": {
-        "id": {
+        "displayName": {
           "type": "string",
-          "description": "Unique identifier for the news update."
+          "description": "The user's display name."
         },
-        "title": {
+        "email": {
           "type": "string",
-          "description": "Title of the news update."
+          "description": "The user's email address.",
+          "format": "email"
         },
-        "content": {
+        "photoURL": {
           "type": "string",
-          "description": "Content of the news update."
-        },
-        "source": {
-          "type": "string",
-          "description": "Source of the news update (e.g., Weverse, Twitter)."
-        },
-        "timestamp": {
-          "type": "string",
-          "description": "Timestamp of when the news update was published.",
-          "format": "date-time"
-        },
-        "imageUrl": {
-          "type": "string",
-          "description": "URL of an image associated with the news update.",
+          "description": "URL of the user's profile picture.",
           "format": "uri"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of when the user account was created.",
+          "format": "date-time"
         }
       },
-      "required": [
-        "id",
-        "title",
-        "content",
-        "source",
-        "timestamp"
-      ]
+      "required": ["displayName", "email", "createdAt"]
     },
-    "VideoContent": {
+    "FeedItem": {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "VideoContent",
+      "title": "Feed Item",
       "type": "object",
-      "description": "Represents a video content item related to Enhypen.",
+      "description": "Represents a single item in the feed like news, video, or photo.",
       "properties": {
-        "id": {
+        "type": {
           "type": "string",
-          "description": "Unique identifier for the video content."
+          "description": "The type of content.",
+          "enum": ["Video", "News", "Photo"]
         },
         "title": {
           "type": "string",
-          "description": "Title of the video."
+          "description": "Title of the content."
         },
         "description": {
           "type": "string",
-          "description": "Description of the video content."
+          "description": "A short description of the content."
         },
-        "url": {
+        "date": {
           "type": "string",
-          "description": "URL of the video.",
-          "format": "uri"
-        },
-        "sourcePlatform": {
-          "type": "string",
-          "description": "Platform where the video is hosted (e.g., YouTube, Netflix)."
-        },
-        "uploadDate": {
-          "type": "string",
-          "description": "Date when the video was uploaded.",
+          "description": "The publication date of the content.",
           "format": "date-time"
         },
-        "category": {
+        "era": {
           "type": "string",
-          "description": "Category of the video (e.g., Performance, Behind the Scenes)."
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "description",
-        "url",
-        "sourcePlatform",
-        "uploadDate",
-        "category"
-      ]
-    },
-    "Photo": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "Photo",
-      "type": "object",
-      "description": "Represents a photo related to Enhypen.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the photo."
+          "description": "The Enhypen era this content belongs to."
         },
-        "title": {
+        "imageUrl": {
           "type": "string",
-          "description": "Title or brief description of the photo."
-        },
-        "url": {
-          "type": "string",
-          "description": "URL of the photo.",
+          "description": "URL of the content's image.",
           "format": "uri"
         },
-        "uploadDate": {
+        "sourceUrl": {
           "type": "string",
-          "description": "Date when the photo was uploaded.",
-          "format": "date-time"
+          "description": "URL to the original content source.",
+          "format": "uri"
         },
-        "source": {
-          "type": "string",
-          "description": "Source of the photo (e.g., Weverse, official website)."
+        "memberIds": {
+          "type": "array",
+          "description": "A list of member IDs associated with this content.",
+          "items": { "type": "string" }
         }
       },
-      "required": [
-        "id",
-        "title",
-        "url",
-        "uploadDate",
-        "source"
-      ]
+      "required": ["type", "title", "date", "imageUrl", "sourceUrl"]
     }
   },
   "auth": {
     "providers": [
       "password",
-      "anonymous"
+      "google.com"
     ]
   },
   "firestore": {
-    "structure": [
-      {
-        "path": "/news_updates/{newsUpdateId}",
-        "definition": {
-          "entityName": "NewsUpdate",
-          "schema": {
-            "$ref": "#/backend/entities/NewsUpdate"
-          },
-          "description": "Collection for storing news updates related to Enhypen. Each document represents a single news update. Supports listing of news updates.",
-          "params": [
-            {
-              "name": "newsUpdateId",
-              "description": "Unique identifier for the news update."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/video_content/{videoContentId}",
-        "definition": {
-          "entityName": "VideoContent",
-          "schema": {
-            "$ref": "#/backend/entities/VideoContent"
-          },
-          "description": "Collection for storing video content related to Enhypen. Each document represents a single video content item. Supports listing of video content.",
-          "params": [
-            {
-              "name": "videoContentId",
-              "description": "Unique identifier for the video content."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/photos/{photoId}",
-        "definition": {
-          "entityName": "Photo",
-          "schema": {
-            "$ref": "#/backend/entities/Photo"
-          },
-          "description": "Collection for storing photos related to Enhypen. Each document represents a single photo. Supports listing of photos.",
-          "params": [
-            {
-              "name": "photoId",
-              "description": "Unique identifier for the photo."
-            }
-          ]
-        }
-      }
-    ],
-    "reasoning": "The Firestore structure is designed to support real-time updates and comprehensive content management for the EN-VERSE app, focusing on Enhypen-related news, videos, and photos. The design prioritizes authorization independence to ensure robust security rules and scalable data access. It adheres to the principle of Authorization Independence via Denormalization, ensuring that security rules do not rely on complex hierarchical `get()` calls, thus optimizing performance and security.\n\nThe `news_updates`, `video_content`, and `photos` collections are structured to provide simple, secure `list` operations (QAPs). All documents within each collection have the same security requirements, ensuring a homogeneous security posture. There are no roles, and authorization depends only on `request.auth.uid`, simplifying security rules.\n\nSince no user-specific private data or collaborative features were outlined in the request, a simple top-level collection approach is used. If user-specific data or collaborative features were needed, a `/users/{userId}` subcollection structure would be utilized with denormalization of authorization data as needed."
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Stores user profile information, keyed by user ID."
+    },
+    "/feed/{feedItemId}": {
+      "schema": { "$ref": "#/entities/FeedItem" },
+      "description": "A unified collection of all content items for the main feed, sorted by date."
+    }
   }
 }

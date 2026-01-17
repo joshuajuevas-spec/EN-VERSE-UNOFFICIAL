@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import type { ContentItem } from '@/lib/types';
+import type { FeedItem } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -11,10 +11,10 @@ import { Badge } from '../ui/badge';
 import Link from 'next/link';
 
 type FeedCardProps = {
-  item: ContentItem;
+  item: FeedItem;
 };
 
-const getIcon = (type: ContentItem['type']) => {
+const getIcon = (type: FeedItem['type']) => {
     switch (type) {
         case 'Video':
             return <PlayCircle className="h-4 w-4" />;
@@ -52,7 +52,7 @@ export function FeedCard({ item }: FeedCardProps) {
             <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
                 <p className="text-lg font-medium">{item.title}</p>
             </a>
-            <p className="text-sm text-muted-foreground whitespace-pre-wrap">{item.description}</p>
+            {item.description && <p className="text-sm text-muted-foreground whitespace-pre-wrap">{item.description}</p>}
             
             {item.imageUrl && (
                 <div className="relative aspect-video w-full overflow-hidden rounded-lg mt-4">

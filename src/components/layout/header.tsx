@@ -8,12 +8,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { notifications } from '@/lib/data';
 import Link from 'next/link';
 import { Card, CardFooter } from '../ui/card';
 
 export function Header() {
   const { toggleSidebar } = useSidebar();
+  const notifications: any[] = [];
 
   const Logo = () => (
      <div className="flex items-center gap-2">

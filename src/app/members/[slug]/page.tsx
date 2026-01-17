@@ -1,14 +1,19 @@
+'use client';
+
 import { notFound } from 'next/navigation';
 import { members } from '@/lib/members-data';
-import { contentItems } from '@/lib/data';
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ContentCard } from '@/components/content/content-card';
-import { Calendar, Music4, Film } from 'lucide-react';
+import { Calendar, Music4 } from 'lucide-react';
 import { format } from 'date-fns';
+import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
+import { collection, query, where, orderBy, Query } from 'firebase/firestore';
+import type { FeedItem } from '@/lib/types';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export async function generateStaticParams() {
   return members.map((member) => ({
@@ -16,14 +21,34 @@ export async function generateStaticParams() {
   }));
 }
 
+function GallerySkeleton() {
+    return (
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[...Array(4)].map((_, i) => (
+                <Skeleton key={i} className="aspect-video rounded-lg" />
+            ))}
+        </div>
+    )
+}
+
 export default function MemberProfilePage({ params }: { params: { slug: string } }) {
   const member = members.find((m) => m.slug === params.slug);
+  const firestore = useFirestore();
+
+  const memberContentQuery = useMemoFirebase(() => {
+    if (!firestore || !member) return null;
+    return query(
+        collection(firestore, 'feed'), 
+        where('memberIds', 'array-contains', member.id),
+        orderBy('date', 'desc')
+    );
+  }, [firestore, member]);
+
+  const { data: memberContent, isLoading } = useCollection<FeedItem>(memberContentQuery as Query | null | undefined);
 
   if (!member) {
     notFound();
   }
-
-  const memberContent = contentItems.filter(item => item.memberIds?.includes(member.id));
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -116,16 +141,19 @@ export default function MemberProfilePage({ params }: { params: { slug: string }
 
           {/* Gallery Tab */}
           <TabsContent value="gallery">
-            {memberContent.length > 0 ? (
+            {isLoading && <GallerySkeleton />}
+            {!isLoading && memberContent && memberContent.length > 0 ? (
                  <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {memberContent.map((item) => (
                         <ContentCard key={item.id} item={item} />
                     ))}
                 </div>
             ) : (
+                !isLoading && (
                  <div className="text-center py-12 text-muted-foreground">
                     <p>No gallery content available for {member.name} yet.</p>
                 </div>
+                )
             )}
           </TabsContent>
         </Tabs>

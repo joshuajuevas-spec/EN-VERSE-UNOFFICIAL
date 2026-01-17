@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import type { ContentItem } from '@/lib/types';
+import type { FeedItem } from '@/lib/types';
 import {
   Card,
 } from '@/components/ui/card';
 import { PlayCircle } from 'lucide-react';
 
 type ContentCardProps = {
-  item: ContentItem;
+  item: FeedItem;
 };
 
 export function ContentCard({ item }: ContentCardProps) {

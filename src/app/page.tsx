@@ -1,56 +1,64 @@
-import Image from 'next/image';
-import { contentItems } from '@/lib/data';
-import { Button } from '@/components/ui/button';
-import { PlayCircle } from 'lucide-react';
-import { parseISO } from 'date-fns';
+'use client';
+
+import { useCollection } from '@/firebase/firestore/use-collection';
+import { collection, query, orderBy, Query, DocumentData } from 'firebase/firestore';
+import { useFirestore, useMemoFirebase } from '@/firebase';
 import { FeedCard } from '@/components/content/feed-card';
+import { Skeleton } from '@/components/ui/skeleton';
+import type { FeedItem } from '@/lib/types';
+
+function FeedSkeleton() {
+  return (
+    <div className="space-y-6">
+      {[...Array(3)].map((_, i) => (
+        <CardSkeleton key={i} />
+      ))}
+    </div>
+  );
+}
+
+function CardSkeleton() {
+  return (
+    <div className="w-full max-w-2xl mx-auto p-4 border rounded-lg">
+      <div className="flex items-center gap-4 mb-4">
+        <Skeleton className="h-10 w-10 rounded-full" />
+        <div className="flex-1 space-y-2">
+          <Skeleton className="h-4 w-1/4" />
+          <Skeleton className="h-3 w-1/2" />
+        </div>
+      </div>
+      <div className="space-y-2 mb-4">
+        <Skeleton className="h-5 w-3/4" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-5/6" />
+      </div>
+      <Skeleton className="aspect-video w-full rounded-lg" />
+    </div>
+  );
+}
 
 export default function Home() {
-  const sortedContent = [...contentItems].sort((a, b) => 
-    parseISO(b.date).getTime() - parseISO(a.date).getTime()
-  );
+  const firestore = useFirestore();
+  
+  const feedQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'feed'), orderBy('date', 'desc'));
+  }, [firestore]);
 
-  const featuredContent = contentItems.find(item => item.id === '13'); // Sweet Venom MV as hero
+  const { data: feedItems, isLoading } = useCollection<FeedItem>(feedQuery as Query<DocumentData, DocumentData> | null | undefined);
 
   return (
     <div className="space-y-12 animate-fade-in">
-      {featuredContent && (
-        <section className="relative w-full h-[60vh] -mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
-          <Image
-            src={featuredContent.imageUrl}
-            alt={featuredContent.title}
-            fill
-            className="object-cover"
-            priority
-            data-ai-hint="kpop music video"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/0 to-background/0" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
-          <div className="relative z-10 flex flex-col justify-end h-full p-4 sm:p-6 lg:p-8 space-y-4 max-w-2xl">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-lg">
-              {featuredContent.title}
-            </h1>
-            <p className="text-lg text-white/90 drop-shadow-md">
-              {featuredContent.description}
-            </p>
-            <div className="flex gap-4">
-                <Button asChild size="lg">
-                    <a href={featuredContent.sourceUrl} target="_blank" rel="noopener noreferrer">
-                        <PlayCircle className="mr-2 h-6 w-6" />
-                        Play
-                    </a>
-                </Button>
-            </div>
-          </div>
-        </section>
-      )}
-      
       <section className="space-y-6">
-        {sortedContent.map((item) => (
-          <FeedCard key={item.id} item={item} />
-        ))}
+        {isLoading && <FeedSkeleton />}
+        {feedItems && feedItems.length > 0 ? (
+          feedItems.map((item) => (
+            <FeedCard key={item.id} item={item} />
+          ))
+        ) : (
+          !isLoading && <p className="text-center text-muted-foreground">No feed items yet. Check back later!</p>
+        )}
       </section>
-
     </div>
   );
 }

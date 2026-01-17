@@ -1,16 +1,18 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import type { ContentItem } from '@/lib/types';
+import type { FeedItem } from '@/lib/types';
 import { Input } from '@/components/ui/input';
 import { ContentCard } from '@/components/content/content-card';
 import { Search as SearchIcon } from 'lucide-react';
+import { useCollection, useFirestore } from '@/firebase';
+import { collection } from 'firebase/firestore';
 
 type SearchControlsProps = {
-  allItems: ContentItem[];
+  initialItems: FeedItem[]; // Renamed from allItems
 };
 
-export function SearchControls({ allItems }: SearchControlsProps) {
+export function SearchControls({ initialItems }: SearchControlsProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [mounted, setMounted] = useState(false);
 
@@ -22,13 +24,13 @@ export function SearchControls({ allItems }: SearchControlsProps) {
     if (!searchTerm) {
       return [];
     }
-    return allItems
+    return initialItems
       .filter((item) =>
         item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
         item.era.toLowerCase().includes(searchTerm.toLowerCase())
       );
-  }, [searchTerm, allItems]);
+  }, [searchTerm, initialItems]);
 
   if (!mounted) {
     return (
