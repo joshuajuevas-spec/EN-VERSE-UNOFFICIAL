@@ -12,12 +12,11 @@ import {
   SidebarMenuButton,
   SidebarFooter,
 } from '@/components/ui/sidebar';
-import { LayoutGrid, Library, Search, Github, User, Users } from 'lucide-react';
+import { LayoutGrid, Search, Github, User, Users } from 'lucide-react';
 import { Button } from '../ui/button';
 
 const navItems = [
   { href: '/', label: 'Home', icon: LayoutGrid },
-  { href: '/content-library', label: 'Content', icon: Library },
   { href: '/members', label: 'Members', icon: Users },
   { href: '/search', label: 'Search', icon: Search },
   { href: '/profile', label: 'My', icon: User },

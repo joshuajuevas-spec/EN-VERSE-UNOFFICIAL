@@ -1,27 +1,14 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { contentItems } from '@/lib/data';
-import { ContentCard } from '@/components/content/content-card';
 import { Button } from '@/components/ui/button';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
-import { PlayCircle, ArrowRight } from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
+import { parseISO } from 'date-fns';
+import { FeedCard } from '@/components/content/feed-card';
 
 export default function Home() {
-  const recentVideos = contentItems
-    .filter((item) => item.type === 'Video')
-    .slice(0, 8);
-  const latestNews = contentItems
-    .filter((item) => item.type === 'News')
-    .slice(0, 8);
-  const photoCollections = contentItems
-    .filter((item) => item.type === 'Photo')
-    .slice(0, 8);
+  const sortedContent = [...contentItems].sort((a, b) => 
+    parseISO(b.date).getTime() - parseISO(a.date).getTime()
+  );
 
   const featuredContent = contentItems.find(item => item.id === '13'); // Sweet Venom MV as hero
 
@@ -58,64 +45,10 @@ export default function Home() {
         </section>
       )}
       
-      <section className="space-y-4">
-        <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold tracking-tight">Recent Videos</h2>
-            <Link href="/content-library" className="text-sm font-medium text-primary hover:underline flex items-center gap-1">
-                View All <ArrowRight className="h-4 w-4" />
-            </Link>
-        </div>
-        <Carousel opts={{ align: 'start', slidesToScroll: 'auto' }} className="w-full">
-          <CarouselContent className="-ml-4">
-            {recentVideos.map((item) => (
-              <CarouselItem key={item.id} className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 pl-4">
-                <ContentCard item={item} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
-        </Carousel>
-      </section>
-      
-      <section className="space-y-4">
-        <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold tracking-tight">Latest News</h2>
-             <Link href="/content-library" className="text-sm font-medium text-primary hover:underline flex items-center gap-1">
-                View All <ArrowRight className="h-4 w-4" />
-            </Link>
-        </div>
-        <Carousel opts={{ align: 'start', slidesToScroll: 'auto' }} className="w-full">
-          <CarouselContent className="-ml-4">
-            {latestNews.map((item) => (
-              <CarouselItem key={item.id} className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 pl-4">
-                <ContentCard item={item} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
-        </Carousel>
-      </section>
-
-      <section className="space-y-4">
-        <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold tracking-tight">Photo Collections</h2>
-             <Link href="/content-library" className="text-sm font-medium text-primary hover:underline flex items-center gap-1">
-                View All <ArrowRight className="h-4 w-4" />
-            </Link>
-        </div>
-        <Carousel opts={{ align: 'start', slidesToScroll: 'auto' }} className="w-full">
-          <CarouselContent className="-ml-4">
-            {photoCollections.map((item) => (
-              <CarouselItem key={item.id} className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 pl-4">
-                <ContentCard item={item} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
-        </Carousel>
+      <section className="space-y-6">
+        {sortedContent.map((item) => (
+          <FeedCard key={item.id} item={item} />
+        ))}
       </section>
 
     </div>

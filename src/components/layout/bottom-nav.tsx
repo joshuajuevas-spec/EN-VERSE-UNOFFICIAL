@@ -3,13 +3,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutGrid, Library, Search, User, Users } from 'lucide-react';
+import { LayoutGrid, Search, User, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const navItems = [
   { href: '/', label: 'Home', icon: LayoutGrid },
-  { href: '/content-library', label: 'Content', icon: Library },
   { href: '/members', label: 'Members', icon: Users },
   { href: '/search', label: 'Search', icon: Search },
   { href: '/profile', label: 'My', icon: User },
@@ -25,7 +24,7 @@ export function BottomNav() {
 
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full h-16 bg-background/95 backdrop-blur-sm border-t border-border/50 md:hidden">
-      <div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
+      <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
         {navItems.map((item) => {
           const isActive = pathname.startsWith(item.href) && (item.href !== '/' || pathname === '/');
           return (
