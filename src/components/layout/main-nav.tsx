@@ -12,12 +12,13 @@ import {
   SidebarMenuButton,
   SidebarFooter,
 } from '@/components/ui/sidebar';
-import { LayoutGrid, Library, Search, Github, User } from 'lucide-react';
+import { LayoutGrid, Library, Search, Github, User, Users } from 'lucide-react';
 import { Button } from '../ui/button';
 
 const navItems = [
   { href: '/', label: 'Home', icon: LayoutGrid },
   { href: '/content-library', label: 'Content', icon: Library },
+  { href: '/members', label: 'Members', icon: Users },
   { href: '/search', label: 'Search', icon: Search },
   { href: '/profile', label: 'My', icon: User },
 ];
@@ -35,7 +36,7 @@ export function MainNav() {
           {navItems.map((item) => (
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
-                isActive={pathname === item.href}
+                isActive={pathname.startsWith(item.href) && (item.href !== '/' || pathname === '/')}
                 tooltip={item.label}
                 asChild
               >

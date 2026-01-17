@@ -11,6 +11,7 @@ export type ContentItem = {
   era: Era;
   imageUrl: string;
   sourceUrl: string;
+  memberIds?: string[];
 };
 
 export type Notification = {
@@ -18,4 +19,17 @@ export type Notification = {
     title: string;
     description: string;
     date: string;
+};
+
+export type Member = {
+    id: string;
+    slug: string;
+    name: string;
+    koreanName: string;
+    birthDate: string;
+    position: string;
+    emoji: string;
+    bio: string;
+    avatarUrl: string;
+    soloActivities: { title: string; date: string; url: string }[];
 };

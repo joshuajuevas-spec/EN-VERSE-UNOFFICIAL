@@ -52,6 +52,7 @@ export const contentItems: ContentItem[] = [
     era: 'Border: Carnival',
     imageUrl: 'https://picsum.photos/seed/enhypen5/600/400',
     sourceUrl: '#',
+    memberIds: ['1', '2']
   },
   {
     id: '6',
@@ -72,6 +73,7 @@ export const contentItems: ContentItem[] = [
     era: 'Dimension: Dilemma',
     imageUrl: 'https://picsum.photos/seed/enhypen7/600/400',
     sourceUrl: '#',
+    memberIds: ['3', '4']
   },
   {
     id: '8',
@@ -92,6 +94,7 @@ export const contentItems: ContentItem[] = [
     era: 'Manifesto: Day 1',
     imageUrl: 'https://picsum.photos/seed/enhypen9/600/400',
     sourceUrl: '#',
+    memberIds: ['5', '6']
   },
   {
     id: '10',
@@ -112,6 +115,7 @@ export const contentItems: ContentItem[] = [
     era: 'Dark Blood',
     imageUrl: 'https://picsum.photos/seed/enhypen11/600/400',
     sourceUrl: '#',
+    memberIds: ['7']
   },
   {
     id: '12',
