@@ -40,31 +40,27 @@ export function MainNav() {
         <SidebarMenu>
           {navItems.map((item) => (
             <SidebarMenuItem key={item.href}>
-              <Link href={item.href} legacyBehavior passHref>
-                <SidebarMenuButton
-                  isActive={pathname === item.href}
-                  tooltip={item.label}
-                  asChild
-                >
-                  <a>
-                    <item.icon />
-                    <span>{item.label}</span>
-                  </a>
-                </SidebarMenuButton>
-              </Link>
+              <SidebarMenuButton
+                isActive={pathname === item.href}
+                tooltip={item.label}
+                asChild
+              >
+                <Link href={item.href}>
+                  <item.icon />
+                  <span>{item.label}</span>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="justify-center">
-         <Link href="https://github.com/firebase/studio" legacyBehavior passHref>
-            <Button variant="ghost" className="w-full justify-start gap-2 group-data-[state=collapsed]:justify-center group-data-[state=collapsed]:w-8 group-data-[state=collapsed]:h-8" asChild>
-                <a>
-                    <Github/>
-                    <span className="group-data-[state=collapsed]:hidden">GitHub</span>
-                </a>
-            </Button>
-        </Link>
+         <Button variant="ghost" className="w-full justify-start gap-2 group-data-[state=collapsed]:justify-center group-data-[state=collapsed]:w-8 group-data-[state=collapsed]:h-8" asChild>
+            <Link href="https://github.com/firebase/studio">
+                <Github/>
+                <span className="group-data-[state=collapsed]:hidden">GitHub</span>
+            </Link>
+        </Button>
       </SidebarFooter>
     </Sidebar>
   );
