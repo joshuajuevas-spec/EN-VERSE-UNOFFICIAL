@@ -38,6 +38,8 @@ export function SearchControls({ allItems }: SearchControlsProps) {
                 <Input
                   placeholder="Search for videos, photos, news..."
                   className="w-full pl-10 h-12 text-lg"
+                  value=""
+                  readOnly
                 />
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
