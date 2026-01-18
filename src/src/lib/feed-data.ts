@@ -1,0 +1,156 @@
+
+import type { FeedItem } from './types';
+
+export const feedData: FeedItem[] = [
+    {
+        id: 'feed-item-1',
+        type: 'Video',
+        title: 'ENHYPEN (엔하이픈) \'Given-Taken\' Official MV',
+        description: 'The official music video for ENHYPEN\'s debut title track "Given-Taken". This marks the beginning of their journey.',
+        date: '2020-11-30T09:00:00Z',
+        era: 'Border: Day One',
+        imageUrl: 'https://images.unsplash.com/photo-1745501639018-e7a42b8bc81e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxmYW50YXN5JTIwc2NlbmV8ZW58MHx8fHwxNzY4NjM0MDQ5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: 'https://www.youtube.com/watch?v=nQ6wEfS_d8c',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+    {
+        id: 'feed-item-2',
+        type: 'News',
+        title: 'ENHYPEN Makes Hot 100 Debut with "Given-Taken"',
+        description: 'Rookie group ENHYPEN has made a remarkable achievement by entering the Billboard Hot 100 chart just weeks after their debut.',
+        date: '2020-12-15T14:00:00Z',
+        era: 'Border: Day One',
+        imageUrl: 'https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaGFydCUyMGRhdGF8ZW58MHx8fHwxNzY4NjM0MDQ5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: '#',
+    },
+    {
+        id: 'feed-item-3',
+        type: 'Photo',
+        title: 'BORDER: DAY ONE - Concept Photo (DAWN Ver.)',
+        description: 'Concept photos for the DAWN version of ENHYPEN\'s debut album "BORDER: DAY ONE".',
+        date: '2020-11-21T00:00:00Z',
+        era: 'Border: Day One',
+        imageUrl: 'https://images.unsplash.com/photo-1712687947291-8e89f1f426ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhcnRpc3QlMjBwb3J0cmFpdHxlbnwwfHx8fDE3Njg1Nzk3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: '#',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+    {
+        id: 'feed-item-4',
+        type: 'Video',
+        title: 'ENHYPEN (엔하이픈) \'Drunk-Dazed\' Official MV',
+        description: 'The official music video for "Drunk-Dazed", the title track of their 2nd Mini Album \'BORDER: CARNIVAL\'.',
+        date: '2021-04-26T09:00:00Z',
+        era: 'Border: Carnival',
+        imageUrl: 'https://images.unsplash.com/photo-1600395450575-2d6988b92a02?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMHZpZGVvfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: 'https://www.youtube.com/watch?v=Fc7-Oe0VudM',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+    {
+        id: 'feed-item-5',
+        type: 'Photo',
+        title: 'JUNGWON - BORDER: CARNIVAL Concept Photo',
+        description: 'Jungwon\'s individual concept photo for the UP version of \'BORDER: CARNIVAL\'.',
+        date: '2021-04-18T00:00:00Z',
+        era: 'Border: Carnival',
+        imageUrl: 'https://picsum.photos/seed/jungwon/400/400',
+        sourceUrl: '#',
+        memberIds: ['6']
+    },
+     {
+        id: 'feed-item-6',
+        type: 'Video',
+        title: 'ENHYPEN (엔하이픈) \'Tamed-Dashed\' Official MV',
+        description: 'The official music video for "Tamed-Dashed" from their 1st Studio Album \'DIMENSION: DILEMMA\'.',
+        date: '2021-10-12T09:00:00Z',
+        era: 'Dimension: Dilemma',
+        imageUrl: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtdXNpYyUyMHZpZGVvfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: 'https://www.youtube.com/watch?v=6IRsW_Tky-s',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+    {
+        id: 'feed-item-7',
+        type: 'News',
+        title: 'ENHYPEN Becomes Million-Seller With 1st Studio Album "DIMENSION: DILEMMA"',
+        description: 'ENHYPEN has achieved a major milestone, with their first full-length album selling over one million copies.',
+        date: '2021-11-10T11:30:00Z',
+        era: 'Dimension: Dilemma',
+        imageUrl: 'https://images.unsplash.com/photo-1760931661664-2dc8e1777be0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtdXNpYyUyMGF3YXJkfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: '#',
+    },
+     {
+        id: 'feed-item-8',
+        type: 'Video',
+        title: 'ENHYPEN (엔하이픈) \'Future Perfect (Pass the MIC)\' Official MV',
+        description: 'The title track from the 3rd Mini Album \'MANIFESTO : DAY 1\'. A powerful Chicago drill-inspired track.',
+        date: '2022-07-04T09:00:00Z',
+        era: 'Manifesto: Day 1',
+        imageUrl: 'https://images.unsplash.com/photo-1602261321009-3800df6e19b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtdXNpYyUyMHZpZGVvfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: 'https://www.youtube.com/watch?v=mU_c_Qcf4yM',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+     {
+        id: 'feed-item-9',
+        type: 'Photo',
+        title: 'MANIFESTO: DAY 1 - Concept Photo (J Ver.)',
+        description: 'Concept photos for the J version of ENHYPEN\'s third mini album "MANIFESTO: DAY 1".',
+        date: '2022-06-25T00:00:00Z',
+        era: 'Manifesto: Day 1',
+        imageUrl: 'https://images.unsplash.com/photo-1724929283294-d8d9c72ec33d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxrcG9wJTIwZ3JvdXB8ZW58MHx8fHwxNzY4NTUyMzgwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: '#',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+    {
+        id: 'feed-item-10',
+        type: 'Video',
+        title: 'ENHYPEN (엔하이픈) \'Bite Me\' Official MV',
+        description: 'The official music video for "Bite Me", from the 4th Mini Album \'DARK BLOOD\'. A fantasy-like concept with a compelling storyline.',
+        date: '2023-05-22T09:00:00Z',
+        era: 'Dark Blood',
+        imageUrl: 'https://images.unsplash.com/photo-1575017064793-b569e425ff75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmYW50YXN5JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzY4NjEzNzQzfDA&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: 'https://www.youtube.com/watch?v=wXFLzODIdUI',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+    {
+        id: 'feed-item-11',
+        type: 'News',
+        title: 'ENHYPEN Announces "FATE" World Tour',
+        description: 'The group will embark on their second world tour, "FATE", visiting cities across Asia and North America.',
+        date: '2023-05-31T10:00:00Z',
+        era: 'Dark Blood',
+        imageUrl: 'https://images.unsplash.com/photo-1735069183448-0c211d61a3fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb25jZXJ0JTIwcG9zdGVyfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: '#',
+    },
+    {
+        id: 'feed-item-12',
+        type: 'Video',
+        title: 'ENHYPEN (엔하이픈) \'Sweet Venom\' Official MV',
+        description: 'The latest title track from the 5th Mini Album \'ORANGE BLOOD\', showcasing a more mature and stylish side of the group.',
+        date: '2023-11-17T09:00:00Z',
+        era: 'Orange Blood',
+        imageUrl: 'https://images.unsplash.com/photo-1602261321009-3800df6e19b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtdXNpYyUyMHZpZGVvfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: 'https://www.youtube.com/watch?v=17Fyx1I5p2w',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+     {
+        id: 'feed-item-13',
+        type: 'Photo',
+        title: 'ORANGE BLOOD - Concept Photo (KSANA Ver.)',
+        description: 'Heeseung\'s concept photo for the KSANA version of \'ORANGE BLOOD\'.',
+        date: '2023-11-05T00:00:00Z',
+        era: 'Orange Blood',
+        imageUrl: 'https://picsum.photos/seed/heeseung/400/400',
+        sourceUrl: '#',
+        memberIds: ['1']
+    },
+     {
+        id: 'feed-item-14',
+        type: 'Photo',
+        title: 'ORANGE BLOOD - Concept Photo (KALPA Ver.)',
+        description: 'A group photo for the KALPA version of \'ORANGE BLOOD\', showing a warm, sun-kissed concept.',
+        date: '2023-11-06T00:00:00Z',
+        era: 'Orange Blood',
+        imageUrl: 'https://images.unsplash.com/photo-1673864120190-b1d38810afe5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxrcG9wJTIwZ3JvdXB8ZW58MHx8fHwxNzY4NTUyMzgwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+        sourceUrl: '#',
+        memberIds: ['1','2','3','4','5','6','7']
+    },
+]
