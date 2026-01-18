@@ -1,0 +1,94 @@
+{
+  "placeholderImages": [
+    {
+      "id": "enhypen1",
+      "description": "Enhypen group performing on stage with dramatic lighting",
+      "imageUrl": "https://images.unsplash.com/photo-1768357515167-b32285450188?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxrcG9wJTIwcGVyZm9ybWFuY2V8ZW58MHx8fHwxNzY4NjM0MDQ4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kpop performance"
+    },
+    {
+      "id": "enhypen2",
+      "description": "Enhypen group concept photo with a dreamy, ethereal vibe",
+      "imageUrl": "https://images.unsplash.com/photo-1712687947291-8e89f1f426ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhcnRpc3QlMjBwb3J0cmFpdHxlbnwwfHx8fDE3Njg1Nzk3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "artist portrait"
+    },
+    {
+      "id": "enhypen3",
+      "description": "Close up of a news article about a music chart",
+      "imageUrl": "https://images.unsplash.com/photo-1593789198777-f29bc259780e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYXJ0aWNsZXxlbnwwfHx8fDE3Njg1NjY0NDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "news article"
+    },
+    {
+      "id": "enhypen4",
+      "description": "Scene from a dynamic music video with energetic choreography",
+      "imageUrl": "https://images.unsplash.com/photo-1600395450575-2d6988b92a02?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMHZpZGVvfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music video"
+    },
+    {
+      "id": "enhypen5",
+      "description": "Bright, colorful concept photo of a K-pop group",
+      "imageUrl": "https://images.unsplash.com/photo-1724929283294-d8d9c72ec33d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxrcG9wJTIwZ3JvdXB8ZW58MHx8fHwxNzY4NTUyMzgwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kpop group"
+    },
+    {
+      "id": "enhypen6",
+      "description": "K-pop group playing sports on a sunny day for a music video",
+      "imageUrl": "https://images.unsplash.com/photo-1485846234645-a62644f84728?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtdXNpYyUyMHZpZGVvfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music video"
+    },
+    {
+      "id": "enhypen7",
+      "description": "Image representing a million-seller music album award",
+      "imageUrl": "https://images.unsplash.com/photo-1760931661664-2dc8e1777be0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtdXNpYyUyMGF3YXJkfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music award"
+    },
+    {
+      "id": "enhypen8",
+      "description": "Gritty, hip-hop style music video scene",
+      "imageUrl": "https://images.unsplash.com/photo-1602261321009-3800df6e19b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtdXNpYyUyMHZpZGVvfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music video"
+    },
+    {
+      "id": "enhypen9",
+      "description": "Dark and powerful concept photo for a music album",
+      "imageUrl": "https://images.unsplash.com/photo-1695927521717-a0ad39d93505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhcnRpc3QlMjBwb3J0cmFpdHxlbnwwfHx8fDE3Njg1Nzk3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "artist portrait"
+    },
+    {
+      "id": "enhypen10",
+      "description": "Gothic and romantic music video scene with vampires",
+      "imageUrl": "https://images.unsplash.com/photo-1745501639018-e7a42b8bc81e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxmYW50YXN5JTIwc2NlbmV8ZW58MHx8fHwxNzY4NjM0MDQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fantasy scene"
+    },
+    {
+      "id": "enhypen11",
+      "description": "Regal and dark fantasy concept photo",
+      "imageUrl": "https://images.unsplash.com/photo-1575017064793-b569e425ff75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmYW50YXN5JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzY4NjEzNzQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fantasy portrait"
+    },
+    {
+      "id": "enhypen12",
+      "description": "Image of a world tour announcement poster",
+      "imageUrl": "https://images.unsplash.com/photo-1735069183448-0c211d61a3fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb25jZXJ0JTIwcG9zdGVyfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "concert poster"
+    },
+    {
+      "id": "enhypen13",
+      "description": "Vibrant and stylish music video with a pop art feel",
+      "imageUrl": "https://images.unsplash.com/photo-1602261321009-3800df6e19b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtdXNpYyUyMHZpZGVvfGVufDB8fHx8MTc2ODYzNDA0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music video"
+    },
+    {
+      "id": "enhypen14",
+      "description": "Warm, sun-kissed concept photo of a K-pop group",
+      "imageUrl": "https://images.unsplash.com/photo-1673864120190-b1d38810afe5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxrcG9wJTIwZ3JvdXB8ZW58MHx8fHwxNzY4NTUyMzgwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kpop group"
+    },
+    {
+      "id": "enhypen15",
+      "description": "Graphic showing a music album's rank on the Billboard chart",
+      "imageUrl": "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaGFydCUyMGRhdGF8ZW58MHx8fHwxNzY4NjM0MDQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chart data"
+    }
+  ]
+}
